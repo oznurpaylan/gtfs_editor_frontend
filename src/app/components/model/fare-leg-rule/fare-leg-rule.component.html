@@ -1,0 +1,127 @@
+<div class="container">
+  <p> <strong>Fare Leg Rule Model </strong></p>
+
+  <button class="button" data-bs-toggle="modal" data-bs-target="#createModal"> Oluştur</button> &nbsp;
+  <button class="button" (click)="save()"> Kaydet</button> <br><br>
+
+  <table class="table" >
+    <thead>
+      <th>fare_product_id</th>
+      <th>leg_group_id</th>
+      <th>network_id</th>
+      <th>from_area_id</th>
+      <th>to_area_id</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody *ngFor="let x of dataList">
+      <td>{{x.fare_product_id}}</td>
+      <td>{{x.leg_group_id}}</td>
+      <td>{{x.network_id}}</td>
+      <td>{{x.from_area_id}}</td>
+      <td>{{x.to_area_id}}</td>
+      <td>
+        <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="deleteTo(this.x)"> Sil</button> &nbsp;
+      </td>
+      <td>
+        <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#updateModal" (click)="update(this.x)"> Güncelle</button>
+      </td>
+    </tbody>
+  </table>
+  </div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" style="font-family: Fontane;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteModalLabel">Model Sil</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" >Kayıtlı veriyi silmek istediğinize emin misiniz?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+        <button type="button" class="btn btn-primary" (click)="deleteData()" data-bs-dismiss="modal" >Sil</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createModalLabel" style="font-family: Fontane;">Model Ekle</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form [formGroup]="formValue" style="font-family: Fontane;">
+            <div class="mb-3">
+              <label class="form-label">fare_product_id</label>
+              <input class="form-control" formControlName="fare_product_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">leg_group_id</label>
+              <input class="form-control" formControlName="leg_group_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">network_id</label>
+              <input class="form-control" formControlName="network_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">from_area_id</label>
+              <input class="form-control" formControlName="from_area_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">to_area_id</label>
+              <input class="form-control" formControlName="to_area_id">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer" style="font-family: Fontane;">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="dataCreate(this.formValue.value)" data-bs-dismiss="modal">Ekle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateModalLabel">Model Güncelle</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form style="font-family: Fontane;">
+          <div class="mb-3">
+            <label class="form-label">fare_product_id</label>
+            <input class="form-control" [(ngModel)]="updateToData.fare_product_id" name="fare_product_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">leg_group_id</label>
+            <input class="form-control" [(ngModel)]="updateToData.leg_group_id" name="leg_group_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">network_id</label>
+            <input class="form-control" [(ngModel)]="updateToData.network_id" name="network_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">from_area_id</label>
+            <input class="form-control" [(ngModel)]="updateToData.from_area_id" name="from_area_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">to_area_id</label>
+            <input class="form-control" [(ngModel)]="updateToData.to_area_id" name="to_area_id">
+          </div>
+        </form>
+      <div class="modal-footer" style="font-family: Fontane;">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+        <button type="button" class="btn btn-primary" (click)="updateData()" data-bs-dismiss="modal">Değişiklikleri Kaydet</button>
+      </div>
+    </div>
+  </div>
+</div>
+

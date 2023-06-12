@@ -1,0 +1,17 @@
+
+<div class="container">
+  <table class="table" >
+    <thead>
+      <tr>
+        <th scope="col">Dosya Adı</th>
+        <th scope="col">URL</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let x of arrayList">
+      <tr>
+        <td>{{x.name}}</td>
+        <td><a href="{{x.url}}" target="_blank">indir</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

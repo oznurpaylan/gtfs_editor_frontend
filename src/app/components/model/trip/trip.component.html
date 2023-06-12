@@ -1,0 +1,176 @@
+<div class="container">
+  <p> <strong>Trip Model</strong> </p>
+
+  <button class="button" data-bs-toggle="modal" data-bs-target="#createModal"> Oluştur</button> &nbsp;
+  <button class="button" (click)="save()"> Kaydet</button> <br><br>
+
+  <table class="table" >
+    <thead>
+      <th>trip_id</th>
+      <th>service_id</th>
+      <th>route_id</th>
+      <th>trip_headsign</th>
+      <th>trip_short_name</th>
+      <th>direction_id</th>
+      <th>block_id</th>
+      <th>shape_id</th>
+      <th>wheelchair_accessible</th>
+      <th>bikes_allowed</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody *ngFor="let x of dataList">
+      <td>{{x.trip_id}}</td>
+      <td>{{x.service_id}}</td>
+      <td>{{x.route_id}}</td>
+      <td>{{x.trip_headsign}}</td>
+      <td>{{x.trip_short_name}}</td>
+      <td>{{x.direction_id}}</td>
+      <td>{{x.block_id}}</td>
+      <td>{{x.shape_id}}</td>
+      <td>{{x.wheelchair_accessible}}</td>
+      <td>{{x.bikes_allowed}}</td>
+      <td>
+        <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="deleteTo(this.x)"> Sil</button> &nbsp;
+      </td>
+      <td>
+        <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#updateModal" (click)="update(this.x)"> Güncelle</button>
+      </td>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" style="font-family: Fontane;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteModalLabel">Model Sil</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" >Kayıtlı veriyi silmek istediğinize emin misiniz?</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="deleteData()" data-bs-dismiss="modal" >Sil</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createModalLabel" style="font-family: Fontane;">Model Ekle</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form [formGroup]="formValue" style="font-family: Fontane;">
+            <div class="mb-3">
+              <label class="form-label">trip_id</label>
+              <input class="form-control" formControlName="trip_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">service_id</label>
+              <input class="form-control" formControlName="service_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">route_id</label>
+              <input class="form-control" formControlName="route_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">trip_headsign</label>
+              <input class="form-control" formControlName="trip_headsign">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">trip_short_name</label>
+              <input class="form-control" formControlName="trip_short_name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">direction_id</label>
+              <input class="form-control" formControlName="direction_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">block_id</label>
+              <input class="form-control" formControlName="block_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">shape_id</label>
+              <input class="form-control" formControlName="shape_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">wheelchair_accessible</label>
+              <input class="form-control" formControlName="wheelchair_accessible">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">bikes_allowed</label>
+              <input class="form-control" formControlName="bikes_allowed">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer" style="font-family: Fontane;">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="dataCreate(this.formValue.value)" data-bs-dismiss="modal" >Ekle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateModalLabel">Model Güncelle</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form style="font-family: Fontane;">
+        <div class="mb-3">
+          <label class="form-label">trip_id</label>
+          <input class="form-control" name="trip_id"  [(ngModel)]="updateToData.trip_id" >
+        </div>
+        <div class="mb-3">
+          <label class="form-label">service_id</label>
+          <input class="form-control" name="service_id"  [(ngModel)]="updateToData.service_id" >
+        </div>
+        <div class="mb-3">
+          <label class="form-label">route_id</label>
+          <input class="form-control" name="route_id"  [(ngModel)]="updateToData.route_id">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">trip_headsign</label>
+          <input class="form-control" name="trip_headsign"  [(ngModel)]="updateToData.trip_headsign" >
+        </div>
+        <div class="mb-3">
+          <label class="form-label">trip_short_name</label>
+          <input class="form-control" name="trip_short_name"  [(ngModel)]="updateToData.trip_short_name" >
+        </div>
+        <div class="mb-3">
+          <label class="form-label">direction_id</label>
+          <input class="form-control" name="direction_id"  [(ngModel)]="updateToData.direction_id" >
+        </div>
+        <div class="mb-3">
+          <label class="form-label">block_id</label>
+          <input class="form-control" name="block_id"  [(ngModel)]="updateToData.block_id" >
+        </div>
+        <div class="mb-3">
+          <label class="form-label">shape_id</label>
+          <input class="form-control" name="shape_id"  [(ngModel)]="updateToData.shape_id" >
+        </div>
+        <div class="mb-3">
+          <label class="form-label">wheelchair_accessible</label>
+          <input class="form-control" name="wheelchair_accessible"  [(ngModel)]="updateToData.wheelchair_accessible" >
+        </div>
+        <div class="mb-3">
+          <label class="form-label">bikes_allowed</label>
+          <input class="form-control" name="bikes_allowed"  [(ngModel)]="updateToData.bikes_allowed">
+        </div>
+        </form>
+      <div class="modal-footer" style="font-family: Fontane;">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+        <button type="button" class="btn btn-primary" (click)="updateData()" data-bs-dismiss="modal" >Değişiklikleri Kaydet</button>
+      </div>
+    </div>
+  </div>
+</div>

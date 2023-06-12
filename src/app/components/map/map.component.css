@@ -1,0 +1,12 @@
+agm-map {
+  height: 450px;
+}
+
+.container{
+  width: 900px;
+  height: 450px;
+  padding: 5px;
+  position: relative;
+  margin: auto;
+  font-family: Fontone;
+}

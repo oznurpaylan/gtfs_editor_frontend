@@ -1,0 +1,15 @@
+.container{
+  width: 800px;
+  height: auto;
+  padding: 5px;
+  position: relative;
+  margin: auto;
+}
+
+.table {
+  margin: auto;
+  font-family: Fontone;
+  border-color: black;
+  border-collapse: collapse;
+  width: 100%;
+}

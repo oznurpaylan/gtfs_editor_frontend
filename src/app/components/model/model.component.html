@@ -1,0 +1,17 @@
+<div class="container">
+  <p><strong>Dosya Adı:</strong> {{fileName}}</p>
+  <p style="text-align: left;"><strong>*Düzenleme yapmak için dosya seçiniz:  </strong></p>
+  <div class="divsol">
+  <table *ngFor="let x of decompressList.files">
+   <tr>
+     <td ><span style="cursor:pointer; color:black; text-decoration:underline;" (click)="getChildView(x.path)">{{x.path}}</span></td>
+   </tr>
+ </table>
+</div>
+  <div class="divsag">
+  <button class="button" [routerLink]="['../save']"> Zip Oluştur</button> <br><br>
+  <button class="button" [routerLink]="['../map']"> Haritada Görüntüle</button>
+  </div>
+</div>
+
+  <router-outlet></router-outlet>

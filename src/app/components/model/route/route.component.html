@@ -1,0 +1,187 @@
+<div class="container">
+  <p> <strong>Route Model </strong></p>
+
+  <button class="button" data-bs-toggle="modal" data-bs-target="#createModal"> Oluştur</button> &nbsp;
+  <button class="button" (click)="save()"> Kaydet</button> <br><br>
+
+  <table class="table" >
+    <thead>
+      <th>route_id</th>
+      <th>agency_id</th>
+      <th>route_type</th>
+      <th>route_short_name</th>
+      <th>route_long_name</th>
+      <th>route_desc</th>
+      <th>route_url</th>
+      <th>route_color</th>
+      <th>route_text_color</th>
+      <th>route_sort_order</th>
+      <th>continuous_drop_off</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody *ngFor="let x of dataList">
+      <td>{{x.route_id}}</td>
+      <td>{{x.agency_id}}</td>
+      <td>{{x.route_type}}</td>
+      <td>{{x.route_short_name}}</td>
+      <td>{{x.route_long_name}}</td>
+      <td>{{x.route_desc}}</td>
+      <td>{{x.route_url}}</td>
+      <td>{{x.route_color}}</td>
+      <td>{{x.route_text_color}}</td>
+      <td>{{x.route_sort_order}}</td>
+      <td>{{x.continuous_drop_off}}</td>
+      <td>
+        <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="deleteTo(this.x)"> Sil</button> &nbsp;
+      </td>
+      <td>
+        <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#updateModal" (click)="update(this.x)"> Güncelle</button>
+      </td>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" style="font-family: Fontane;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteModalLabel">Model Sil</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" >Kayıtlı veriyi silmek istediğinize emin misiniz?</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="deleteData()" data-bs-dismiss="modal" >Sil</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createModalLabel" style="font-family: Fontane;">Model Ekle</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form [formGroup]="formValue" style="font-family: Fontane;">
+            <div class="mb-3">
+              <label class="form-label">route_id</label>
+              <input class="form-control" formControlName="route_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">agency_id</label>
+              <input class="form-control" formControlName="agency_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">route_type</label>
+              <input class="form-control" formControlName="route_type">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">route_short_name</label>
+              <input class="form-control" formControlName="route_short_name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">route_long_name</label>
+              <input class="form-control" formControlName="route_long_name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">route_desc</label>
+              <input class="form-control" formControlName="route_desc">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">route_url</label>
+              <input class="form-control" formControlName="route_url">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">route_color</label>
+              <input class="form-control" formControlName="route_color">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">route_text_color</label>
+              <input class="form-control" formControlName="route_text_color">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">route_sort_order</label>
+              <input class="form-control" formControlName="route_sort_order">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">continuous_drop_off</label>
+              <input class="form-control" formControlName="continuous_drop_off">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer" style="font-family: Fontane;">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="dataCreate(this.formValue.value)" data-bs-dismiss="modal">Ekle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="updateModalLabel">Model Güncelle</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form style="font-family: Fontane;">
+           <div class="mb-3">
+            <label class="form-label">route_id</label>
+            <input class="form-control" name="route_id" [(ngModel)]="updateToData.route_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">agency_id</label>
+            <input class="form-control" name="agency_id" [(ngModel)]="updateToData.agency_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">route_type</label>
+            <input class="form-control" name="route_type" [(ngModel)]="updateToData.route_type">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">route_short_name</label>
+            <input class="form-control" name="route_short_name" [(ngModel)]="updateToData.route_short_name">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">route_long_name</label>
+            <input class="form-control" name="route_long_name" [(ngModel)]="updateToData.route_long_name">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">route_desc</label>
+            <input class="form-control" name="route_desc" [(ngModel)]="updateToData.route_desc">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">route_url</label>
+            <input class="form-control" name="route_url" [(ngModel)]="updateToData.route_url">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">route_color</label>
+            <input class="form-control" name="route_color" [(ngModel)]="updateToData.route_color">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">route_text_color</label>
+            <input class="form-control" name="route_text_color" [(ngModel)]="updateToData.route_text_color">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">route_sort_order</label>
+            <input class="form-control" name="route_sort_order" [(ngModel)]="updateToData.route_sort_order">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">continuous_drop_off</label>
+            <input class="form-control" name="continuous_drop_off" [(ngModel)]="updateToData.continuous_drop_off">
+          </div>
+
+          </form>
+        <div class="modal-footer" style="font-family: Fontane;">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="updateData()"  data-bs-dismiss="modal">Değişiklikleri Kaydet</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,169 @@
+<div class="container">
+<p><strong> Agency Model</strong> </p>
+
+<button class="button" data-bs-toggle="modal" data-bs-target="#createModal"> Oluştur</button> &nbsp;
+<button class="button" (click)="save()"> Kaydet</button> <br><br>
+
+<!-- yenile butonu konularak gelen filename göre tekrar sayfayı yenilesin silme ve oluşturmada kullanılır -->
+
+<table class="table" >
+  <thead>
+    <!-- <th>id</th> -->
+    <th>agency_id</th>
+    <th>agency_name</th>
+    <th>agency_url</th>
+    <th>agency_timezone</th>
+    <th>agency_lang</th>
+    <th>agency_phone</th>
+    <th>agency_fare_url</th>
+    <th>agency_email</th>
+    <!-- <th>session_id</th> -->
+    <th></th>
+    <th></th>
+
+  </thead>
+  <tbody *ngFor="let x of dataList">
+    <!-- <td>{{x._id}}</td> -->
+    <td>{{x.agency_id}}</td>
+    <td>{{x.agency_name}}</td>
+    <td>{{x.agency_url}}</td>
+    <td>{{x.agency_timezone}}</td>
+    <td>{{x.agency_lang}}</td>
+    <td>{{x.agency_phone}}</td>
+    <td>{{x.agency_fare_url}}</td>
+    <td>{{x.agency_email}}</td>
+    <!-- <td>{{x.session_id}}</td> -->
+    <td>
+      <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="deleteTo(this.x)"> Sil</button> &nbsp;
+    </td>
+    <td>
+      <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#updateModal" (click)="update(this.x)"> Güncelle</button>
+    </td>
+  </tbody>
+</table>
+</div>
+
+<!-- Sil butonuna basıldığında çalışacak olan -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" style="font-family: Fontane;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteModalLabel">Model Sil</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" >Kayıtlı veriyi silmek istediğinize emin misiniz?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+        <button type="button" class="btn btn-primary" (click)="deleteData()" data-bs-dismiss="modal" >Sil</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Oluştur butonuna tıklandığında Create fonk çalışması için  -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="createModalLabel" style="font-family: Fontane;">Model Ekle</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="formValue" style="font-family: Fontane;">
+          <div class="mb-3">
+            <label class="form-label">agency_id</label>
+            <input class="form-control" formControlName="agency_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">agency_name</label>
+            <input class="form-control" formControlName="agency_name">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">agency_url</label>
+            <input class="form-control" formControlName="agency_url">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">agency_timezone</label>
+            <input class="form-control" formControlName="agency_timezone">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">agency_lang</label>
+            <input class="form-control" formControlName="agency_lang">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">agency_phone</label>
+            <input class="form-control" formControlName="agency_phone">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">agency_fare_url</label>
+            <input class="form-control" formControlName="agency_fare_url">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">agency_email</label>
+            <input class="form-control" formControlName="agency_email">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer" style="font-family: Fontane;">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+        <button type="button" class="btn btn-primary" (click)="dataCreate(this.formValue.value)" data-bs-dismiss="modal">Ekle</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Güncelle butonuna basıldığında çalışacak model -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateModalLabel">Model Güncelle</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form style="font-family: Fontane;">
+          <div class="mb-3">
+            <label class="form-label">agency_id</label>
+            <input class="form-control" name='agency_id'  [(ngModel)]="updateToData.agency_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">agency_name</label>
+            <input class="form-control" name='agency_name' [(ngModel)]="updateToData.agency_name" >
+          </div>
+          <div class="mb-3">
+            <label class="form-label">agency_url</label>
+            <input class="form-control"  name="agency_url"[(ngModel)]="updateToData.agency_url"  >
+          </div>
+          <div class="mb-3">
+            <label class="form-label">agency_timezone</label>
+            <input class="form-control" name="agency_timezone" [(ngModel)]="updateToData.agency_timezone">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">agency_lang</label>
+            <input class="form-control"  name="agency_lang"  [(ngModel)]="updateToData.agency_lang" >
+          </div>
+          <div class="mb-3">
+            <label class="form-label">agency_phone</label>
+            <input class="form-control" name="agency_phone" [(ngModel)]="updateToData.agency_phone">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">agency_fare_url</label>
+            <input class="form-control" name="agency_fare_url" [(ngModel)]="updateToData.agency_fare_url">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">agency_email</label>
+            <input class="form-control" name="agency_email" [(ngModel)]="updateToData.agency_email">
+      </div>
+        </form>
+
+      <div class="modal-footer" style="font-family: Fontane;">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+        <button type="button" class="btn btn-primary" (click)="updateData()" data-bs-dismiss="modal">Değişiklikleri Kaydet</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

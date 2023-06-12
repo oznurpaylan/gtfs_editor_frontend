@@ -1,0 +1,17 @@
+export interface Stop {
+  stop_id: string,
+  stop_name: string,
+  stop_lat: string,
+  stop_lon: string,
+  stop_code: string,
+  stop_desc: string,
+  zone_id: string,
+  stop_url: string,
+  location_type: string,
+  parent_station: string,
+  stop_timezone: string,
+  wheelchair_boarding: string,
+  level_id: string,
+  platform_code: string,
+  session_id: string,
+}

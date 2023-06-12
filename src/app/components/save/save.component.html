@@ -1,0 +1,21 @@
+<div class="container">
+  <p>Oluşturulacak zip dosyası adı:</p>
+  <input type="text" [(ngModel)]="txtInput" placeholder="file_name"> &nbsp;
+  <button class="button" (click)="saveZip()"> Zip Oluştur</button> <br><br>
+
+  <table class="table" *ngFor="let x of data">
+    <thead>
+      <tr>
+        <th scope="col">Dosya Adı</th>
+        <th scope="col">URL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{x.name}}</td>
+        <td><a href="{{x.url}}" target="_blank">indir</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

@@ -1,0 +1,17 @@
+<div class="container">
+  <p>*Veri tabanına eklenecek verileri seçiniz.</p>
+  <div class="divsol">
+    <p><strong>Dosya Adı: </strong> {{fileName}} </p>
+    <p><strong>Dosya İçeriği: </strong></p>
+    <table *ngFor="let x of decompressList.files">
+      <tr>
+        <td><span style="cursor:pointer; color:black; text-decoration:underline;" (click)="add(x.path)">{{x.path}}</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="divsag">
+    <button class="button" [routerLink]="['../model']">Düzenle (CRUD)</button>
+  </div>
+</div>
+<router-outlet></router-outlet>

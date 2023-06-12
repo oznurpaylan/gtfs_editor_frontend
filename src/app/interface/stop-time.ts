@@ -1,0 +1,15 @@
+export interface StopTime {
+  trip_id: string,
+  stop_id: string,
+  stop_sequence: string,
+  arrival_time: string,
+  departure_time: string,
+  stop_headsign: string,
+  pickup_type: string,
+  drop_off_type: string,
+  continuous_pickup: string,
+  continuous_drop_off: string,
+  shape_dist_traveled: string,
+  timepoint: string,
+  session_id: string,
+}

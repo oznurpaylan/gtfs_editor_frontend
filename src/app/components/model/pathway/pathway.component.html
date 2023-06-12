@@ -1,0 +1,197 @@
+<div class="container">
+  <p> <strong>Pathway Model</strong> </p>
+
+  <button class="button" data-bs-toggle="modal" data-bs-target="#createModal"> Oluştur</button> &nbsp;
+  <button class="button" (click)="save()"> Kaydet</button> <br><br>
+
+  <table class="table" >
+    <thead>
+      <th>pathway_id</th>
+      <th>from_stop_id</th>
+      <th>to_stop_id</th>
+      <th>pathway_mode</th>
+      <th>is_bidirectional</th>
+      <th>length</th>
+      <th>traversal_time</th>
+      <th>stair_count</th>
+      <th>max_slope</th>
+      <th>min_width</th>
+      <th>signposted_as</th>
+      <th>reversed_signposted_as</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody *ngFor="let x of dataList">
+      <td>{{x.pathway_id}}</td>
+      <td>{{x.from_stop_id}}</td>
+      <td>{{x.to_stop_id}}</td>
+      <td>{{x.pathway_mode}}</td>
+      <td>{{x.is_bidirectional}}</td>
+      <td>{{x.length}}</td>
+      <td>{{x.traversal_time}}</td>
+      <td>{{x.stair_count}}</td>
+      <td>{{x.max_slope}}</td>
+      <td>{{x.min_width}}</td>
+      <td>{{x.signposted_as}}</td>
+      <td>{{x.reversed_signposted_as}}</td>
+      <td>
+        <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="deleteTo(this.x)"> Sil</button> &nbsp;
+      </td>
+      <td>
+        <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#updateModal" (click)="update(this.x)"> Güncelle</button>
+      </td>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" style="font-family: Fontane;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteModalLabel">Model Sil</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" >Kayıtlı veriyi silmek istediğinize emin misiniz?</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="deleteData()" data-bs-dismiss="modal" >Sil</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createModalLabel" style="font-family: Fontane;">Model Ekle</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form [formGroup]="formValue" style="font-family: Fontane;">
+            <div class="mb-3">
+              <label class="form-label">pathway_id</label>
+              <input class="form-control" formControlName="pathway_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">from_stop_id</label>
+              <input class="form-control" formControlName="from_stop_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">to_stop_id</label>
+              <input class="form-control" formControlName="to_stop_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">pathway_mode</label>
+              <input class="form-control" formControlName="pathway_mode">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">is_bidirectional</label>
+              <input class="form-control" formControlName="is_bidirectional">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">length</label>
+              <input class="form-control" formControlName="length">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">traversal_time</label>
+              <input class="form-control" formControlName="traversal_time">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">stair_count</label>
+              <input class="form-control" formControlName="stair_count">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">max_slope</label>
+              <input class="form-control" formControlName="max_slope">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">min_width</label>
+              <input class="form-control" formControlName="min_width">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">signposted_as</label>
+              <input class="form-control" formControlName="signposted_as">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">reversed_signposted_as</label>
+              <input class="form-control" formControlName="reversed_signposted_as">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer" style="font-family: Fontane;">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="dataCreate(this.formValue.value)" data-bs-dismiss="modal">Ekle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="updateModalLabel">Model Güncelle</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form style="font-family: Fontane;">
+           <div class="mb-3">
+            <label class="form-label">pathway_id</label>
+            <input class="form-control" name="pathway_id" [(ngModel)]="updateToData.pathway_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">from_stop_id</label>
+            <input class="form-control" name="from_stop_id" [(ngModel)]="updateToData.from_stop_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">to_stop_id</label>
+            <input class="form-control" name="to_stop_id" [(ngModel)]="updateToData.to_stop_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">pathway_mode</label>
+            <input class="form-control" name="pathway_mode" [(ngModel)]="updateToData.pathway_mode">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">is_bidirectional</label>
+            <input class="form-control" name="is_bidirectional" [(ngModel)]="updateToData.is_bidirectional">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">length</label>
+            <input class="form-control" name="length" [(ngModel)]="updateToData.length">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">traversal_time</label>
+            <input class="form-control" name="traversal_time" [(ngModel)]="updateToData.traversal_time">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">stair_count</label>
+            <input class="form-control" name="stair_count" [(ngModel)]="updateToData.stair_count">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">max_slope</label>
+            <input class="form-control" name="max_slope" [(ngModel)]="updateToData.max_slope">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">min_width</label>
+            <input class="form-control" name="min_width" [(ngModel)]="updateToData.min_width">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">signposted_as</label>
+            <input class="form-control" name="signposted_as" [(ngModel)]="updateToData.signposted_as">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">reversed_signposted_as</label>
+            <input class="form-control" name="reversed_signposted_as" [(ngModel)]="updateToData.reversed_signposted_as">
+          </div>
+
+          </form>
+        <div class="modal-footer" style="font-family: Fontane;">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="updateData()" data-bs-dismiss="modal">Değişiklikleri Kaydet</button>
+        </div>
+      </div>
+    </div>
+  </div>

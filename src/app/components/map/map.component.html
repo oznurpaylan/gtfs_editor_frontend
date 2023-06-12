@@ -1,0 +1,49 @@
+<div class="container">
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Uyarı!</strong> Hat bilgisini seçtikten sonra lütfen hattın gideceği yönü giriniz...
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+  </button>
+</div>
+
+<p>Görüntülenecek Hat: </p>
+<table *ngFor="let x of routeList">
+  <tr>
+    <td><span style="cursor:pointer; color:black; text-decoration:underline;" (click)="routeDirection(x.route_id)">{{x.route_short_name}}</span></td>
+  </tr>
+</table>
+<br>
+
+<div  >
+<p>Hattın yönü: </p>
+  <table *ngFor="let x of tripList" >
+  <tr>
+    <td><span style="cursor:pointer; color:black; text-decoration:underline;" (click)="tripDirection(x.trip_id)">{{x.trip_headsign}}</span></td>
+  </tr>
+</table>
+</div>
+<br>
+
+ <agm-map [latitude]="lat" [longitude]="lng" [zoom]="3" [fitBounds]="true">  <!-- (mapReady)="onMapReady($event)" fitBounds marker konumuna odaklanmak-->
+ <agm-marker *ngFor="let m of markers;
+    let i = index"
+    [latitude]="m.lat"
+    [longitude]="m.lng"
+    [label]="m.label"
+    [markerDraggable]="m.draggable"
+    (markerClick)="clickedMarker(m.lat,m.lng)"
+    [agmFitBounds]="true">
+
+ <!-- <agm-info-window> //bilgi mesajı
+    <strong>{{m.content}}</strong>
+  </agm-info-window> -->
+  </agm-marker>
+
+  <agm-polyline [visible]="true" [strokeWeight]="3" [strokeColor]="'#000000'">
+    <agm-polyline-point *ngFor="let coordinate of points; let i=index"
+      [latitude]="coordinate.lat"
+      [longitude]="coordinate.lng">
+    </agm-polyline-point>
+  </agm-polyline>
+
+</agm-map>
+</div>

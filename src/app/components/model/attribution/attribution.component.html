@@ -1,0 +1,192 @@
+<div class="container">
+  <p> <strong> Attribution Model</strong> </p>
+
+  <button class="button" data-bs-toggle="modal" data-bs-target="#createModal"> Oluştur</button> &nbsp;
+  <button class="button" (click)="save()"> Kaydet</button> <br><br>
+
+  <table class="table">
+    <thead>
+      <th>attribution_id</th>
+      <th>agency_id</th>
+      <th>route_id</th>
+      <th>trip_id</th>
+      <th>organization_name</th>
+      <th>is_producer</th>
+      <th>is_operator</th>
+      <th>is_authority</th>
+      <th>attribution_url</th>
+      <th>attribution_email</th>
+      <th>attribution_phone</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody *ngFor="let x of dataList">
+      <td>{{x.attribution_id}}</td>
+      <td>{{x.agency_id}}</td>
+      <td>{{x.route_id}}</td>
+      <td>{{x.trip_id}}</td>
+      <td>{{x.organization_name}}</td>
+      <td>{{x.is_producer}}</td>
+      <td>{{x.is_operator}}</td>
+      <td>{{x.is_authority}}</td>
+      <td>{{x.attribution_url}}</td>
+      <td>{{x.attribution_email}}</td>
+      <td>{{x.attribution_phone}}</td>
+      <td>
+        <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
+          (click)="deleteTo(this.x)"> Sil</button> &nbsp;
+      </td>
+      <td>
+        <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#updateModal"
+          (click)="update(this.x)"> Güncelle</button>
+      </td>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true"
+  style="font-family: Fontane;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteModalLabel">Model Sil</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">Kayıtlı veriyi silmek istediğinize emin misiniz?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+        <button type="button" class="btn btn-primary" (click)="deleteData()" data-bs-dismiss="modal">Sil</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="createModalLabel" style="font-family: Fontane;">Model Ekle</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="formValue" style="font-family: Fontane;">
+          <div class="mb-3">
+            <label class="form-label">attribution_id</label>
+            <input class="form-control" formControlName="attribution_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">agency_id</label>
+            <input class="form-control" formControlName="agency_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">route_id</label>
+            <input class="form-control" formControlName="route_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">trip_id</label>
+            <input class="form-control" formControlName="trip_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">organization_name</label>
+            <input class="form-control" formControlName="organization_name">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">is_producer</label>
+            <input class="form-control" formControlName="is_producer">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">is_operator</label>
+            <input class="form-control" formControlName="is_operator">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">is_authority</label>
+            <input class="form-control" formControlName="is_authority">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">attribution_url</label>
+            <input class="form-control" formControlName="attribution_url">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">attribution_email</label>
+            <input class="form-control" formControlName="attribution_email">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">attribution_phone</label>
+            <input class="form-control" formControlName="attribution_phone">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer" style="font-family: Fontane;">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+        <button type="button" class="btn btn-primary" (click)="dataCreate(this.formValue.value)"
+          data-bs-dismiss="modal">Ekle</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateModalLabel">Model Güncelle</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form style="font-family: Fontane;">
+          <div class="mb-3">
+            <label class="form-label">attribution_id</label>
+            <input class="form-control" name="attribution_id" [(ngModel)]="updateToData.attribution_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">agency_id</label>
+            <input class="form-control" name="agency_id" [(ngModel)]="updateToData.agency_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">route_id</label>
+            <input class="form-control" name="route_id" [(ngModel)]="updateToData.route_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">trip_id</label>
+            <input class="form-control" name="trip_id" [(ngModel)]="updateToData.trip_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">organization_name</label>
+            <input class="form-control" name="organization_name" [(ngModel)]="updateToData.organization_name">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">is_producer</label>
+            <input class="form-control" name="is_producer" [(ngModel)]="updateToData.is_producer">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">is_operator</label>
+            <input class="form-control" name="is_operator" [(ngModel)]="updateToData.is_operator">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">is_authority</label>
+            <input class="form-control" name="is_authority" [(ngModel)]="updateToData.is_authority">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">attribution_url</label>
+            <input class="form-control" name="attribution_url" [(ngModel)]="updateToData.attribution_url">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">attribution_email</label>
+            <input class="form-control" name="attribution_email" [(ngModel)]="updateToData.attribution_email">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">attribution_phone</label>
+            <input class="form-control" name="attribution_phone" [(ngModel)]="updateToData.attribution_phone">
+          </div>
+        </form>
+        <div class="modal-footer" style="font-family: Fontane;">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="updateData()" data-bs-dismiss="modal">Değişiklikleri
+            Kaydet</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,196 @@
+<div class="container">
+  <p> <strong>Stop Time Model</strong> </p>
+
+  <button class="button" data-bs-toggle="modal" data-bs-target="#createModal"> Oluştur</button> &nbsp;
+  <button class="button" (click)="save()"> Kaydet</button> <br><br>
+
+  <table class="table" >
+    <thead>
+      <th>trip_id</th>
+      <th>stop_id</th>
+      <th>stop_sequence</th>
+      <th>arrival_time</th>
+      <th>departure_time</th>
+      <th>stop_headsign</th>
+      <th>pickup_type</th>
+      <th>drop_off_type</th>
+      <th>continuous_pickup</th>
+      <th>continuous_drop_off</th>
+      <th>shape_dist_traveled</th>
+      <th>timepoint</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody *ngFor="let x of dataList">
+      <td>{{x.trip_id}}</td>
+      <td>{{x.stop_id}}</td>
+      <td>{{x.stop_sequence}}</td>
+      <td>{{x.arrival_time}}</td>
+      <td>{{x.departure_time}}</td>
+      <td>{{x.stop_headsign}}</td>
+      <td>{{x.pickup_type}}</td>
+      <td>{{x.drop_off_type}}</td>
+      <td>{{x.continuous_pickup}}</td>
+      <td>{{x.continuous_drop_off}}</td>
+      <td>{{x.shape_dist_traveled}}</td>
+      <td>{{x.timepoint}}</td>
+      <td>
+        <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="deleteTo(this.x)"> Sil</button> &nbsp;
+      </td>
+      <td>
+        <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#updateModal" (click)="update(this.x)"> Güncelle</button>
+      </td>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" style="font-family: Fontane;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteModalLabel">Model Sil</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" >Kayıtlı veriyi silmek istediğinize emin misiniz?</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="deleteData()" data-bs-dismiss="modal" >Sil</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createModalLabel" style="font-family: Fontane;">Model Ekle</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form [formGroup]="formValue" style="font-family: Fontane;">
+            <div class="mb-3">
+              <label class="form-label">trip_id</label>
+              <input class="form-control" formControlName="trip_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">stop_id</label>
+              <input class="form-control" formControlName="stop_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">stop_sequence</label>
+              <input class="form-control" formControlName="stop_sequence">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">arrival_time</label>
+              <input class="form-control" formControlName="arrival_time">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">departure_time</label>
+              <input class="form-control" formControlName="departure_time">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">stop_headsign</label>
+              <input class="form-control" formControlName="stop_headsign">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">pickup_type</label>
+              <input class="form-control" formControlName="pickup_type">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">drop_off_type</label>
+              <input class="form-control" formControlName="drop_off_type">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">continuous_pickup</label>
+              <input class="form-control" formControlName="continuous_pickup">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">continuous_drop_off</label>
+              <input class="form-control" formControlName="continuous_drop_off">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">shape_dist_traveled</label>
+              <input class="form-control" formControlName="shape_dist_traveled">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">timepoint</label>
+              <input class="form-control" formControlName="timepoint">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer" style="font-family: Fontane;">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="dataCreate(this.formValue.value)" data-bs-dismiss="modal">Ekle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="updateModalLabel">Model Güncelle</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form style="font-family: Fontane;">
+          <div class="mb-3">
+            <label class="form-label">trip_id</label>
+            <input class="form-control" name="trip_id"  [(ngModel)]="updateToData.trip_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">stop_id</label>
+            <input class="form-control" name="stop_id"  [(ngModel)]="updateToData.stop_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">stop_sequence</label>
+            <input class="form-control" name="stop_sequence"  [(ngModel)]="updateToData.stop_sequence">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">arrival_time</label>
+            <input class="form-control" name="arrival_time"  [(ngModel)]="updateToData.arrival_time">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">departure_time</label>
+            <input class="form-control" name="departure_time"  [(ngModel)]="updateToData.departure_time">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">stop_headsign</label>
+            <input class="form-control" name="stop_headsign"  [(ngModel)]="updateToData.stop_headsign">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">pickup_type</label>
+            <input class="form-control" name="pickup_type"  [(ngModel)]="updateToData.pickup_type">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">drop_off_type</label>
+            <input class="form-control" name="drop_off_type"  [(ngModel)]="updateToData.drop_off_type">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">continuous_pickup</label>
+            <input class="form-control" name="continuous_pickup"  [(ngModel)]="updateToData.continuous_pickup">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">continuous_drop_off</label>
+            <input class="form-control" name="continuous_drop_off"  [(ngModel)]="updateToData.continuous_drop_off">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">shape_dist_traveled</label>
+            <input class="form-control" name="shape_dist_traveled"  [(ngModel)]="updateToData.shape_dist_traveled">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">timepoint</label>
+            <input class="form-control" name="timepoint"  [(ngModel)]="updateToData.timepoint">
+          </div>
+          </form>
+        <div class="modal-footer" style="font-family: Fontane;">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="updateData()" data-bs-dismiss="modal">Değişiklikleri Kaydet</button>
+        </div>
+      </div>
+    </div>
+  </div>

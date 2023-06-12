@@ -1,0 +1,216 @@
+<div class="container">
+  <p> <strong>Stop Model </strong></p>
+
+  <button class="button" data-bs-toggle="modal" data-bs-target="#createModal"> Oluştur</button> &nbsp;
+  <button class="button" (click)="save()"> Kaydet</button> <br><br>
+
+  <table class="table" >
+    <thead>
+      <th>stop_id</th>
+      <th>stop_name</th>
+      <th>stop_lat</th>
+      <th>stop_lon</th>
+      <th>stop_code</th>
+      <th>stop_desc</th>
+      <th>zone_id</th>
+      <th>stop_url</th>
+      <th>location_type</th>
+      <th>parent_station</th>
+      <th>stop_timezone</th>
+      <th>wheelchair_boarding</th>
+      <th>level_id</th>
+      <th>platform_code</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody *ngFor="let x of dataList">
+      <td>{{x.stop_id}}</td>
+      <td>{{x.stop_name}}</td>
+      <td>{{x.stop_lat}}</td>
+      <td>{{x.stop_lon}}</td>
+      <td>{{x.stop_code}}</td>
+      <td>{{x.stop_desc}}</td>
+      <td>{{x.zone_id}}</td>
+      <td>{{x.stop_url}}</td>
+      <td>{{x.location_type}}</td>
+      <td>{{x.parent_station}}</td>
+      <td>{{x.stop_timezone}}</td>
+      <td>{{x.wheelchair_boarding}}</td>
+      <td>{{x.level_id}}</td>
+      <td>{{x.platform_code}}</td>
+      <td>
+        <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="deleteTo(this.x)"> Sil</button> &nbsp;
+      </td>
+      <td>
+        <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#updateModal" (click)="update(this.x)"> Güncelle</button>
+      </td>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" style="font-family: Fontane;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteModalLabel">Model Sil</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" >Kayıtlı veriyi silmek istediğinize emin misiniz?</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="deleteData()" data-bs-dismiss="modal" >Sil</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createModalLabel" style="font-family: Fontane;">Model Ekle</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form [formGroup]="formValue" style="font-family: Fontane;">
+            <div class="mb-3">
+              <label class="form-label">stop_id</label>
+              <input class="form-control" formControlName="stop_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">stop_name</label>
+              <input class="form-control" formControlName="stop_name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">stop_lat</label>
+              <input class="form-control" formControlName="stop_lat">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">stop_lon</label>
+              <input class="form-control" formControlName="stop_lon">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">stop_code</label>
+              <input class="form-control" formControlName="stop_code">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">stop_desc</label>
+              <input class="form-control" formControlName="stop_desc">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">zone_id</label>
+              <input class="form-control" formControlName="zone_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">stop_url</label>
+              <input class="form-control" formControlName="stop_url">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">location_type</label>
+              <input class="form-control" formControlName="location_type">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">parent_station</label>
+              <input class="form-control" formControlName="parent_station">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">stop_timezone</label>
+              <input class="form-control" formControlName="stop_timezone">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">wheelchair_boarding</label>
+              <input class="form-control" formControlName="wheelchair_boarding">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">level_id</label>
+              <input class="form-control" formControlName="level_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">platform_code</label>
+              <input class="form-control" formControlName="platform_code">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer" style="font-family: Fontane;">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="dataCreate(this.formValue.value)" data-bs-dismiss="modal" >Ekle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="updateModalLabel">Model Güncelle</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form style="font-family: Fontane;">
+           <div class="mb-3">
+            <label class="form-label">stop_id</label>
+            <input class="form-control" name="stop_id"  [(ngModel)]="updateToData.stop_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">stop_name</label>
+            <input class="form-control" name="stop_name"  [(ngModel)]="updateToData.stop_name">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">stop_lat</label>
+            <input class="form-control" name="stop_lat"  [(ngModel)]="updateToData.stop_lat">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">stop_lon</label>
+            <input class="form-control" name="stop_lon"  [(ngModel)]="updateToData.stop_lon">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">stop_code</label>
+            <input class="form-control" name="stop_code"  [(ngModel)]="updateToData.stop_code">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">stop_desc</label>
+            <input class="form-control" name="stop_desc"  [(ngModel)]="updateToData.stop_desc">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">zone_id</label>
+            <input class="form-control" name="zone_id"  [(ngModel)]="updateToData.zone_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">stop_url</label>
+            <input class="form-control" name="stop_url"  [(ngModel)]="updateToData.stop_url">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">location_type</label>
+            <input class="form-control" name="location_type"  [(ngModel)]="updateToData.location_type">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">parent_station</label>
+            <input class="form-control" name="parent_station"  [(ngModel)]="updateToData.parent_station">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">stop_timezone</label>
+            <input class="form-control" name="stop_timezone"  [(ngModel)]="updateToData.stop_timezone">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">wheelchair_boarding</label>
+            <input class="form-control" name="wheelchair_boarding"  [(ngModel)]="updateToData.wheelchair_boarding">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">level_id</label>
+            <input class="form-control" name="level_id"  [(ngModel)]="updateToData.level_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">platform_code</label>
+            <input class="form-control" name="platform_code"  [(ngModel)]="updateToData.platform_code">
+          </div>
+          </form>
+        <div class="modal-footer" style="font-family: Fontane;">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="updateData()" data-bs-dismiss="modal" >Değişiklikleri Kaydet</button>
+        </div>
+      </div>
+    </div>
+  </div>

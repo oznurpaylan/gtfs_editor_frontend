@@ -1,0 +1,182 @@
+<div class="container">
+  <p> <strong>Calendar Model </strong></p>
+
+  <button class="button" data-bs-toggle="modal" data-bs-target="#createModal"> Oluştur</button> &nbsp;
+  <button class="button" (click)="save()"> Kaydet</button> <br><br>
+
+  <table class="table">
+    <thead>
+      <th>service_id</th>
+      <th>start_date</th>
+      <th>end_date</th>
+      <th>monday</th>
+      <th>tuesday</th>
+      <th>wednesday</th>
+      <th>thursday</th>
+      <th>friday</th>
+      <th>saturday</th>
+      <th>sunday</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody *ngFor="let x of dataList">
+      <td>{{x.service_id}}</td>
+      <td>{{x.start_date}}</td>
+      <td>{{x.end_date}}</td>
+      <td>{{x.monday}}</td>
+      <td>{{x.tuesday}}</td>
+      <td>{{x.wednesday}}</td>
+      <td>{{x.thursday}}</td>
+      <td>{{x.friday}}</td>
+      <td>{{x.saturday}}</td>
+      <td>{{x.sunday}}</td>
+      <td>
+        <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
+          (click)="deleteTo(this.x)"> Sil</button> &nbsp;
+      </td>
+      <td>
+        <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#updateModal"
+          (click)="update(this.x)"> Güncelle</button>
+      </td>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true"
+  style="font-family: Fontane;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteModalLabel">Model Sil</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">Kayıtlı veriyi silmek istediğinize emin misiniz?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+        <button type="button" class="btn btn-primary" (click)="deleteData()" data-bs-dismiss="modal">Sil</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="createModalLabel" style="font-family: Fontane;">Model Ekle</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="formValue" style="font-family: Fontane;">
+          <div class="mb-3">
+            <label class="form-label">service_id</label>
+            <input class="form-control" formControlName="service_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">start_date</label>
+            <input class="form-control" formControlName="start_date">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">end_date</label>
+            <input class="form-control" formControlName="end_date">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">monday</label>
+            <input class="form-control" formControlName="monday">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">tuesday</label>
+            <input class="form-control" formControlName="tuesday">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">wednesday</label>
+            <input class="form-control" formControlName="wednesday">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">thursday</label>
+            <input class="form-control" formControlName="thursday">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">friday</label>
+            <input class="form-control" formControlName="friday">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">saturday</label>
+            <input class="form-control" formControlName="saturday">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">sunday</label>
+            <input class="form-control" formControlName="sunday">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer" style="font-family: Fontane;">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+        <button type="button" class="btn btn-primary" (click)="dataCreate(this.formValue.value)"
+          data-bs-dismiss="modal">Ekle</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateModalLabel">Model Güncelle</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form style="font-family: Fontane;">
+          <div class="mb-3">
+            <label class="form-label">service_id</label>
+            <input class="form-control" name="service_id" [(ngModel)]="updateToData.service_id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">start_date</label>
+            <input class="form-control" name="start_date" [(ngModel)]="updateToData.start_date">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">end_date</label>
+            <input class="form-control" name="end_date" [(ngModel)]="updateToData.end_date">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">monday</label>
+            <input class="form-control" name="monday" [(ngModel)]="updateToData.monday">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">tuesday</label>
+            <input class="form-control" name="tuesday" [(ngModel)]="updateToData.tuesday">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">wednesday</label>
+            <input class="form-control" name="wednesday" [(ngModel)]="updateToData.wednesday">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">thursday</label>
+            <input class="form-control" name="thursday" [(ngModel)]="updateToData.thursday">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">friday</label>
+            <input class="form-control" name="friday" [(ngModel)]="updateToData.friday">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">saturday</label>
+            <input class="form-control" name="saturday" [(ngModel)]="updateToData.saturday">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">sunday</label>
+            <input class="form-control" name="sunday" [(ngModel)]="updateToData.sunday">
+          </div>
+        </form>
+        <div class="modal-footer" style="font-family: Fontane;">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="updateData()" data-bs-dismiss="modal">Değişiklikleri
+            Kaydet</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

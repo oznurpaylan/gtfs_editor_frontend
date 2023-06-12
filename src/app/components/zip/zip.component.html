@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="input-div ">
+    <input type="file" name="file" class="form-control" (change)="selectFile($event)" accept=".zip , .rar" /><br><br>
+  </div>
+  <div class="button-div">
+    <button type="button" class="button" [routerLink]="['upload']" (click)="upload()"> Yükle </button>
+    <button type="button" class="button" [routerLink]="['filedecompress']" (click)="decompress()"> Ayıkla </button>
+    <button type="button" class="button" (click)="deleteFile()"> Sil </button>
+    <button type="button" class="button" [routerLink]="['filelist']" (click)="list()"> Listele </button>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

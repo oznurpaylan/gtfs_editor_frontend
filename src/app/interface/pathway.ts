@@ -1,0 +1,15 @@
+export interface Pathway {
+  pathway_id: string,
+  from_stop_id: string,
+  to_stop_id: string,
+  pathway_mode: string,
+  is_bidirectional: string,
+  length: string,
+  traversal_time: string,
+  stair_count: string,
+  max_slope: string,
+  min_width: string,
+  signposted_as: string,
+  reversed_signposted_as: string,
+  session_id: string,
+}

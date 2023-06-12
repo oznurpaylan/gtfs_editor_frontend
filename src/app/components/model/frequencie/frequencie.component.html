@@ -1,0 +1,126 @@
+<div class="container">
+  <p> <strong>Fare Frequencie Model</strong> </p>
+
+  <button class="button" data-bs-toggle="modal" data-bs-target="#createModal"> Oluştur</button> &nbsp;
+  <button class="button" (click)="save()"> Kaydet</button> <br><br>
+
+  <table class="table" >
+    <thead>
+      <th>trip_id</th>
+      <th>start_time</th>
+      <th>end_time</th>
+      <th>headway_secs</th>
+      <th>exact_times</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody *ngFor="let x of dataList">
+      <td>{{x.trip_id}}</td>
+      <td>{{x.start_time}}</td>
+      <td>{{x.end_time}}</td>
+      <td>{{x.headway_secs}}</td>
+      <td>{{x.exact_times}}</td>
+      <td>
+        <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="deleteTo(this.x)"> Sil</button> &nbsp;
+      </td>
+      <td>
+    <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#updateModal" (click)="update(this.x)"> Güncelle</button>
+      </td>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" style="font-family: Fontane;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteModalLabel">Model Sil</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" >Kayıtlı veriyi silmek istediğinize emin misiniz?</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="deleteData()" data-bs-dismiss="modal" >Sil</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createModalLabel" style="font-family: Fontane;">Model Ekle</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form [formGroup]="formValue" style="font-family: Fontane;">
+            <div class="mb-3">
+              <label class="form-label">trip_id</label>
+              <input class="form-control" formControlName="trip_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">start_time</label>
+              <input class="form-control" formControlName="start_time">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">end_time</label>
+              <input class="form-control" formControlName="end_time">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">headway_secs</label>
+              <input class="form-control" formControlName="headway_secs">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">exact_times</label>
+              <input class="form-control" formControlName="exact_times">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer" style="font-family: Fontane;">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="dataCreate(this.formValue.value)" data-bs-dismiss="modal">Ekle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateModalLabel">Model Güncelle</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form style="font-family: Fontane;">
+           <div class="mb-3">
+              <label class="form-label">trip_id</label>
+              <input class="form-control" name="trip_id" [(ngModel)]="updateToData.trip_id">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">start_time</label>
+              <input class="form-control" name="start_time" [(ngModel)]="updateToData.start_time">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">end_time</label>
+              <input class="form-control" name="end_time" [(ngModel)]="updateToData.end_time">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">headway_secs</label>
+              <input class="form-control" name="headway_secs" [(ngModel)]="updateToData.headway_secs">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">exact_times</label>
+              <input class="form-control" name="exact_times" [(ngModel)]="updateToData.exact_times">
+            </div>
+        </form>
+      <div class="modal-footer" style="font-family: Fontane;">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+        <button type="button" class="btn btn-primary" (click)="updateData()" data-bs-dismiss="modal">Değişiklikleri Kaydet</button>
+      </div>
+    </div>
+  </div>
+</div>

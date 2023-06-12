@@ -1,0 +1,166 @@
+<div class="container">
+  <p> <strong>Fare Info Model</strong> </p>
+
+  <button class="button" data-bs-toggle="modal" data-bs-target="#createModal"> Oluştur</button> &nbsp;
+  <button class="button" (click)="save()"> Kaydet</button> <br><br>
+
+  <table class="table" >
+    <thead>
+      <th>feed_publisher_name</th>
+      <th>feed_publisher_url</th>
+      <th>feed_lang</th>
+      <th>default_lang</th>
+      <th>feed_start_date</th>
+      <th>feed_end_date</th>
+      <th>feed_version</th>
+      <th>feed_contact_email</th>
+      <th>feed_contact_url</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody *ngFor="let x of dataList">
+      <td>{{x.feed_publisher_name}}</td>
+      <td>{{x.feed_publisher_url}}</td>
+      <td>{{x.feed_lang}}</td>
+      <td>{{x.default_lang}}</td>
+      <td>{{x.feed_start_date}}</td>
+      <td>{{x.feed_end_date}}</td>
+      <td>{{x.feed_version}}</td>
+      <td>{{x.feed_contact_email}}</td>
+      <td>{{x.feed_contact_url}}</td>
+      <td>
+        <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="deleteTo(this.x)"> Sil</button> &nbsp;
+      </td>
+      <td>
+        <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#updateModal" (click)="update(this.x)"> Güncelle</button>
+      </td>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" style="font-family: Fontane;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteModalLabel">Model Sil</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" >Kayıtlı veriyi silmek istediğinize emin misiniz?</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="deleteData()" data-bs-dismiss="modal" >Sil</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createModalLabel" style="font-family: Fontane;">Model Ekle</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form [formGroup]="formValue" style="font-family: Fontane;">
+            <div class="mb-3">
+              <label class="form-label">feed_publisher_name</label>
+              <input class="form-control" formControlName="feed_publisher_name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">feed_publisher_url</label>
+              <input class="form-control" formControlName="feed_publisher_url">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">feed_lang</label>
+              <input class="form-control" formControlName="feed_lang">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">default_lang</label>
+              <input class="form-control" formControlName="default_lang">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">feed_start_date</label>
+              <input class="form-control" formControlName="feed_start_date">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">feed_end_date</label>
+              <input class="form-control" formControlName="feed_end_date">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">feed_version</label>
+              <input class="form-control" formControlName="feed_version">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">feed_contact_email</label>
+              <input class="form-control" formControlName="feed_contact_email">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">feed_contact_url</label>
+              <input class="form-control" formControlName="feed_contact_url">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer" style="font-family: Fontane;">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="dataCreate(this.formValue.value)" data-bs-dismiss="modal" >Ekle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="updateModalLabel">Model Güncelle</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form style="font-family: Fontane;">
+            <div class="mb-3">
+              <label class="form-label">feed_publisher_name</label>
+              <input class="form-control" name="feed_publisher_name" [(ngModel)]="updateToData.feed_publisher_name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">feed_publisher_url</label>
+              <input class="form-control" name="feed_publisher_url" [(ngModel)]="updateToData.feed_publisher_url">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">feed_lang</label>
+              <input class="form-control" name="feed_lang" [(ngModel)]="updateToData.feed_lang">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">default_lang</label>
+              <input class="form-control" name="default_lang" [(ngModel)]="updateToData.default_lang">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">feed_start_date</label>
+              <input class="form-control" name="feed_start_date " [(ngModel)]="updateToData.feed_start_date">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">feed_end_date</label>
+              <input class="form-control" name="feed_end_date" [(ngModel)]="updateToData.feed_end_date">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">feed_version</label>
+              <input class="form-control" name="feed_version" [(ngModel)]="updateToData.feed_version">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">feed_contact_email</label>
+              <input class="form-control" name="feed_contact_email" [(ngModel)]="updateToData.feed_contact_email">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">feed_contact_url</label>
+              <input class="form-control" name="feed_contact_url" [(ngModel)]="updateToData.feed_contact_url">
+            </div>
+          </form>
+        <div class="modal-footer" style="font-family: Fontane;">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-primary" (click)="updateData()" data-bs-dismiss="modal" >Değişiklikleri Kaydet</button>
+        </div>
+      </div>
+    </div>
+  </div>

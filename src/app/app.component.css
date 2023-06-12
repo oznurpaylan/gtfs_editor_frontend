@@ -1,0 +1,17 @@
+header {
+  background-color: hsl(0, 0%, 86%);
+  color: #040000;
+  padding: 10px;
+}
+nav {
+  display: flex;
+  margin: 10px;
+  justify-content: space-between;
+}
+p {
+  font-family: Lato;
+  font-size: 30px;
+  color: #000000;
+  text-decoration: none;
+  margin-right: 5px;
+}

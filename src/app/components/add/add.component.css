@@ -1,0 +1,42 @@
+.container{
+  width: 900px;
+  height: auto;
+  padding: 5px;
+  position: relative;
+  margin: auto;
+  font-family: Fontone;
+}
+
+.divsol {
+  width: 50%;
+  float: left;
+  height: auto;
+  /* text-align: center; */
+}
+.divsag {
+  width: 50%;
+  float: right;
+  height: auto;
+}
+
+.button{
+  background-color: hsl(0, 0%, 86%);
+  border:none;
+  text-align: center;
+  font-size: 12px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+
+input[type=text] {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 10px ;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
