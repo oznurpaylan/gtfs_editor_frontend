@@ -28,7 +28,6 @@ export class LevelComponent  implements OnInit {
       session_id: this.fileName
     })
 
-
     this.modelService.levelSearch(this.fileName).subscribe((Response) => {
       if (Response) {
         this.dataList = Response;
@@ -66,7 +65,6 @@ export class LevelComponent  implements OnInit {
       }
     });
   }
-
 
   updateToData = {
     level_id: '',

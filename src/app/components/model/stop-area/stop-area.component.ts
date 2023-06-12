@@ -27,7 +27,6 @@ export class StopAreaComponent  implements OnInit {
       session_id: this.fileName
     })
 
-
     this.modelService.stopAreaSearch(this.fileName).subscribe((Response) => {
       if (Response) {
         this.dataList = Response;

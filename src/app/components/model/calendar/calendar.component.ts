@@ -35,7 +35,6 @@ export class CalendarComponent implements OnInit {
       session_id: this.fileName
     })
 
-
     this.modelService.calendarSearch(this.fileName).subscribe((Response) => {
       if (Response) {
         this.dataList = Response;
@@ -78,7 +77,6 @@ export class CalendarComponent implements OnInit {
     });
   }
 
-
   updateToData = {
     service_id: '',
     start_date: '',
@@ -102,7 +100,6 @@ export class CalendarComponent implements OnInit {
   updateData() {
     this.modelService.calendarUpdate(this.updateToId, this.updateToData).subscribe((Response) => {
       if (Response) {
-       // console.log(Response)
         this.toastService.success('Kayıt Güncellendi...')
       }
     })

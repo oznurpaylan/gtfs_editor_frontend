@@ -32,14 +32,12 @@ export class FareAttributeComponent  implements OnInit {
       session_id: this.fileName
     })
 
-
     this.modelService.fareAttributeSearch(this.fileName).subscribe((Response) => {
       if (Response) {
         this.dataList = Response;
       }
     });
   }
-
 
   dataCreate(data: FareAttribute) {
     this.modelService.fareAttributeCreate(data).subscribe((Response) => {
@@ -56,7 +54,6 @@ export class FareAttributeComponent  implements OnInit {
 
   deleteToId: any;
   deleteTo(x: any) {
-    //tablodan gelen id ye göre silem
     console.log(x._id);
     this.deleteToId = x._id;
   }
@@ -67,14 +64,12 @@ export class FareAttributeComponent  implements OnInit {
       }
     });
 
-    //sayfayı yenilemek için tekrar çağırma
    await this.modelService.fareAttributeSearch(this.fileName).subscribe((Response) => {
       if (Response) {
         this.dataList = Response;
       }
     });
   }
-
 
   updateToData = {
     fare_id: '',
@@ -100,7 +95,6 @@ export class FareAttributeComponent  implements OnInit {
       }
     })
   }
-
 
   save(){
     this.saveService.fareAttributesSave(this.fileName).subscribe((Response) => {

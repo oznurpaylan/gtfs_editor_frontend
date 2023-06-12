@@ -30,7 +30,6 @@ export class FrequencieComponent  implements OnInit {
       session_id: this.fileName
     })
 
-
     this.modelService.frequencieSearch(this.fileName).subscribe((Response) => {
       if (Response) {
         this.dataList = Response;
@@ -53,7 +52,6 @@ export class FrequencieComponent  implements OnInit {
 
   deleteToId: any;
   deleteTo(x: any) {
-    //tablodan gelen id ye göre silem
     console.log(x._id);
     this.deleteToId = x._id;
   }
@@ -64,7 +62,6 @@ export class FrequencieComponent  implements OnInit {
       }
     });
 
-    //sayfayı yenilemek için tekrar çağırma
    await this.modelService.frequencieSearch(this.fileName).subscribe((Response) => {
       if (Response) {
         this.dataList = Response;

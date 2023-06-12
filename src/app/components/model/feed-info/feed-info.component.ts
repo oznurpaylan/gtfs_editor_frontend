@@ -73,7 +73,6 @@ export class FeedInfoComponent  implements OnInit {
     });
   }
 
-
   updateToData = {
     feed_publisher_name: '',
     feed_publisher_url: '',

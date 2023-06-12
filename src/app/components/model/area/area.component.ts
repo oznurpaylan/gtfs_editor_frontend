@@ -27,14 +27,12 @@ export class AreaComponent implements OnInit {
       session_id: this.fileName
     })
 
-
     this.modelService.areaSearch(this.fileName).subscribe((Response) => {
       if (Response) {
         this.dataList = Response;
       }
     });
   }
-
 
   dataCreate(data: Area) {
     this.modelService.areaCreate(data).subscribe((Response) => {
@@ -51,7 +49,6 @@ export class AreaComponent implements OnInit {
 
   deleteToId: any;
   deleteTo(x: any) {
-    //tablodan gelen id ye göre silem
     console.log(x._id);
     this.deleteToId = x._id;
   }
@@ -62,7 +59,6 @@ export class AreaComponent implements OnInit {
       }
     });
 
-    //sayfayı yenilemek için tekrar çağırma
    await this.modelService.areaSearch(this.fileName).subscribe((Response) => {
       if (Response) {
         this.dataList = Response;

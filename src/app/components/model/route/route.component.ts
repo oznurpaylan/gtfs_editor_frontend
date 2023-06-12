@@ -36,14 +36,12 @@ export class RouteComponent  implements OnInit {
       session_id: this.fileName
     })
 
-
     this.modelService.routeSearch(this.fileName).subscribe((Response) => {
       if (Response) {
         this.dataList = Response;
       }
     });
   }
-
 
   dataCreate(data: Route) {
     this.modelService.routeCreate(data).subscribe((Response) => {

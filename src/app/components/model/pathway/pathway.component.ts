@@ -37,7 +37,6 @@ export class PathwayComponent  implements OnInit {
       session_id: this.fileName
     })
 
-
     this.modelService.pathwaySearch(this.fileName).subscribe((Response) => {
       if (Response) {
         this.dataList = Response;

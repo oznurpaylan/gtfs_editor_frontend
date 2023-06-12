@@ -30,7 +30,6 @@ export class FareLegRuleComponent implements OnInit {
       session_id: this.fileName
     })
 
-
     this.modelService.fareLegRuleSearch(this.fileName).subscribe((Response) => {
       if (Response) {
         this.dataList = Response;
@@ -54,7 +53,6 @@ export class FareLegRuleComponent implements OnInit {
 
   deleteToId: any;
   deleteTo(x: any) {
-    //tablodan gelen id ye göre silem
     console.log(x._id);
     this.deleteToId = x._id;
   }
@@ -93,7 +91,6 @@ export class FareLegRuleComponent implements OnInit {
       }
     })
   }
-
 
   save() {
     this.saveService.fareLegRulesSave(this.fileName).subscribe((Response) => {

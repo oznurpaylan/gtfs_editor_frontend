@@ -43,7 +43,6 @@ export class AttributionComponent implements OnInit {
     });
   }
 
-
   dataCreate(data: Attribution) {
     this.modelService.attributionCreate(data).subscribe((Response) => {
       if (Response) {
@@ -59,7 +58,6 @@ export class AttributionComponent implements OnInit {
 
   deleteToId: any;
   deleteTo(x: any) {
-    //tablodan gelen id ye göre silem
     console.log(x._id);
     this.deleteToId = x._id;
   }
@@ -70,7 +68,6 @@ export class AttributionComponent implements OnInit {
       }
     });
 
-    //sayfayı yenilemek için tekrar çağırma
    await this.modelService.attributionSearch(this.fileName).subscribe((Response) => {
       if (Response) {
         this.dataList = Response;

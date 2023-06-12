@@ -35,7 +35,6 @@ export class TripComponent implements OnInit {
       session_id: this.fileName
     })
 
-
     this.modelService.tripSearch(this.fileName).subscribe((Response) => {
       if (Response) {
         this.dataList = Response;
@@ -101,7 +100,6 @@ export class TripComponent implements OnInit {
       }
     })
   }
-
 
   save() {
     this.saveService.tripSave(this.fileName).subscribe((Response) => {

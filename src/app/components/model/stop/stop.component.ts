@@ -39,7 +39,6 @@ export class StopComponent  implements OnInit {
       session_id: this.fileName
     })
 
-
     this.modelService.stopSearch(this.fileName).subscribe((Response) => {
       if (Response) {
         this.dataList = Response;
