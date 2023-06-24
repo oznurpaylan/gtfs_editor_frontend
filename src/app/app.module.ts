@@ -40,7 +40,7 @@ import { AgmCoreModule } from '@agm/core';
       progressBar: true,
     }),
     AgmCoreModule.forRoot({
-      apiKey:"AIzaSyBf4XkRE9AAvi4m1lJbVztNaCN0g4usSRU", //YOUR_API_KEY
+      apiKey:"", //YOUR_API_KEY
     }),
   ],
   providers: [],
